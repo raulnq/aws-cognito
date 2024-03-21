@@ -1,8 +1,34 @@
-﻿@{
+﻿﻿@using Microsoft.AspNetCore.Authentication
+@{
     ViewData["Title"] = "Home Page";
 }
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+
+    @if (User.Identity.IsAuthenticated)
+    {
+        <p>
+            Authenticated!
+        </p>
+        <h2>Claims</h2>
+        <table class="table table-bordered">
+            <tr>
+                <th>Claim Type</th>
+                <th>Value</th>
+            </tr>
+            @foreach (var item in User.Claims)
+            {
+                <tr>
+                    <td>
+                        @item.Type
+                    </td>
+                    <td>
+                        @item.Value
+                    </td>
+                </tr>
+            }
+        </table>
+    }
 </div>

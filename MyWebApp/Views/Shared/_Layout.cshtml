@@ -2,9 +2,6 @@
 @using Amazon.Extensions.CognitoAuthentication
 @using System.Security.Claims
 
-@inject SignInManager<CognitoUser> SignInManager
-@inject UserManager<CognitoUser> UserManager
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -34,24 +31,19 @@
                         </li>
                     </ul>
                     <ul class="navbar-nav">
-                        @if (SignInManager.IsSignedIn(User))
+                        @if (User.Identity.IsAuthenticated)
                         {
                             <li class="nav-item">
                                 <span class="nav-link text-dark">Hello @User.FindFirstValue(ClaimTypes.Email)!</span>
                             </li>
                             <li class="nav-item">
-                                <form id="logoutForm" class="form-inline" asp-area="" asp-controller="Account" asp-action="Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                                    <button id="logout" type="submit" class="nav-link btn btn-link text-dark border-0">Logout</button>
-                                </form>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Logout">Logout</a>
                             </li>
                         }
                         else
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" id="register" asp-area="" asp-controller="Account" asp-action="Register">Register</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" id="login" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
+                                <a class="nav-link text-dark" id="login" asp-area="" asp-controller="Account" asp-action="Login" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">Login</a>
                             </li>
                         }
                     </ul>

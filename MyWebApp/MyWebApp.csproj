@@ -9,6 +9,7 @@
   <ItemGroup>
     <PackageReference Include="Amazon.AspNetCore.Identity.Cognito" Version="3.0.1" />
     <PackageReference Include="Amazon.Extensions.CognitoAuthentication" Version="2.5.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="8.0.3" />
   </ItemGroup>
 
 </Project>

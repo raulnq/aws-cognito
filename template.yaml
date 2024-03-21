@@ -51,7 +51,26 @@ Resources:
         - ALLOW_REFRESH_TOKEN_AUTH 
       SupportedIdentityProviders:
         - COGNITO
-  
+      AllowedOAuthFlowsUserPoolClient: true
+      AllowedOAuthFlows:
+        - code
+      AllowedOAuthScopes:
+        - email
+        - openid
+        - profile
+        - aws.cognito.signin.user.admin
+      LogoutURLs:
+        - "https://localhost:7119/Account/Loggedout" 
+      CallbackURLs:
+        - "https://localhost:7119/signin-oidc"
+
+  UserDomainPool:
+    Type: AWS::Cognito::UserPoolDomain
+    Properties:
+      Domain: "myuserdomainpoolx95"
+      UserPoolId: !Ref UserPool
+
+ 
 Outputs:
   CognitoUserPoolID:
     Value: !Ref UserPool
@@ -59,3 +78,6 @@ Outputs:
   CognitoClientID:
     Value: !Ref UserPoolClient
     Description: The app client
+  HostedUIDomain:
+    Value: !Ref UserDomainPool
+    Description: Hosted UI domain
