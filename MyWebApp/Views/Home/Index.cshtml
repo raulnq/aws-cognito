@@ -30,5 +30,10 @@
                 </tr>
             }
         </table>
+        <h2>Access Token</h2>
+        <span>@(await Context.GetTokenAsync("access_token"))</span>
+
+        <h2>ID Token</h2>
+        <span>@(await Context.GetTokenAsync("id_token"))</span>
     }
 </div>

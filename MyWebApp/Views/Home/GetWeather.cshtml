@@ -1,0 +1,31 @@
+﻿@model WeatherViewModel[]
+@{
+    ViewData["Title"] = "Weather";
+}
+<h1>@ViewData["Title"]</h1>
+
+<table class="table table-bordered">
+    <tr>
+        <th>Date</th>
+        <th>Summary</th>
+        <th>TemperatureC</th>
+        <th>TemperatureF</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @item.Date
+            </td>
+            <td>
+                @item.Summary
+            </td>
+            <td>
+                @item.TemperatureC
+            </td>
+            <td>
+                @item.TemperatureF
+            </td>
+        </tr>
+    }
+</table>

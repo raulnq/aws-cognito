@@ -31,6 +31,7 @@ builder.Services.AddAuthentication(options =>
     options.Scope.Add("email");
     options.Scope.Add("aws.cognito.signin.user.admin");
     options.Scope.Add("profile");
+    options.Scope.Add("weatherapi/read");
     options.SaveTokens = true;
 
     Task OnRedirectToIdentityProviderForSignOut(RedirectContext context)
@@ -46,6 +47,14 @@ builder.Services.AddAuthentication(options =>
         return Task.CompletedTask;
     }
 });
+
+builder.Services.AddOpenIdConnectAccessTokenManagement();
+
+builder.Services.AddHttpClient("api", client =>
+{
+    client.BaseAddress = new Uri("https://localhost:7064/");
+})
+.AddUserAccessTokenHandler();
 
 var app = builder.Build();
 
